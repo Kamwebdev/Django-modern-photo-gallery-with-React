@@ -1,8 +1,7 @@
 # Django-modern-photo-gallery-with-React
-#### Nowoczesna aplikacja stworzona z wykorzystaniem Django REST API i React.Głównym konceptem było wykorzystanie reacta do dynamicznego wyświetlania galerii zdjęć.
-Demo aplikacji dostępne pod adresem https://photoforpassion.tk/
+Nowoczesna aplikacja stworzona z wykorzystaniem Django REST API i React.Głównym konceptem było wykorzystanie reacta do dynamicznego wyświetlania galerii zdjęć.
 
-
+#### Demo aplikacji dostępne pod adresem https://photoforpassion.tk/
 
 ### Instalacja :
 ```
