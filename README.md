@@ -2,6 +2,7 @@
 Nowoczesna aplikacja stworzona z wykorzystaniem Django REST API i React.
 Demo aplikacji dostępne pod adresem https://photoforpassion.tk/
 
+## Głównym konceptem aplikacji jest wykorzystanie reacta do dynamicznego wyświetlania galerii zdjęć.
 
 ### Instalacja :
 ```
