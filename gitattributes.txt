@@ -15,5 +15,5 @@
 *.pyd		binary
 *.pyo 		binary
 
-*.js linguist-language=Python
-*.css linguist-language=Python
+*.css linguist-detectable=false
+*.js linguist-detectable=false
