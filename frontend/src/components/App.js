@@ -46,7 +46,6 @@ function Photos(props) {
   );
 }
 
-
 class App extends Component {
   constructor(props) {
     super(props);
@@ -57,11 +56,19 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.getData()
+    this.getData();
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (this.state.count !== prevState.count) {
+      let offset = 100;
+      window.scrollTo({
+        behavior: "smooth",
+        top:
+          document.getElementById("top").getBoundingClientRect().top -
+          document.body.getBoundingClientRect().top -
+          offset
+      });
       this.getData()
     }
 
@@ -69,12 +76,13 @@ class App extends Component {
 
   increment() {
     this.setState({
-      count: this.state.count + 3,
+      count: this.state.count + 5,
     });
   };
 
+
   getData() {
-    fetch("api/top/?format=json&limit=3&offset=" + this.state.count + "")
+    fetch("api/top/?format=json&limit=5&offset=" + this.state.count + "")
       .then(response => {
         if (response.status > 400) {
           return this.setState(() => {
@@ -84,24 +92,28 @@ class App extends Component {
         return response.json();
       })
       .then(data => {
-        this.setState({ data: [...this.state.data, ...data.results], next: data.next })
+        this.setState({ data: [...data.results], next: data.next })
       });
   }
+
 
 
   render() {
     const dataLoaded = this.state.data.length;
     const next = this.state.next;
-    console.log(this.state.next)
     return (
-      <>
-        {dataLoaded ? <Photos photos={this.state.data} /> :
-          <h3>Ładowanie galerii zdjęć...</h3>
-         }
-        {next ? <button className='btn-show-more' onClick={(e) => this.increment(e)}>Pokaż więcej</button>:""}
-      </>
+      <div id="top">
+        {dataLoaded
+          ? <div>
+            <Photos photos={this.state.data} />
+            {next ? <button className='btn-show-more' onClick={(e) => this.increment(e)}>Pokaż więcej</button> : ""}
+          </div>
+          : <h3>Ładowanie galerii zdjęć...</h3>
+        }
+      </div>
     );
   }
+
 }
 
 export default App;
