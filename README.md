@@ -12,5 +12,6 @@ pip install -r requirements.txt
 python3 manage.py makemigrations
 python3 manage.py makemigrations gallery
 python3 manage.py migrate
+npm run build
 python3 manage.py runserver
 ```
