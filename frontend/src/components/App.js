@@ -21,12 +21,6 @@ function Photos(props) {
 
   return (
     <div>
-      <div className="row justify-content-center mb-2 pb-3">
-        <div className="col-md-7 heading-section heading-section-2 text-center ftco-animate fadeInUp ftco-animated">
-          <h2 className="mb-4">Ostatnio dodane zdjęcia</h2>
-          <h5 className="mb-4">Kliknij na zdjęcie, aby powiększyć</h5>
-        </div>
-      </div>
       <Gallery photos={props.photos} onClick={openLightbox} />
       <ModalGateway>
         {viewerIsOpen ? (
@@ -61,20 +55,22 @@ class App extends Component {
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (this.state.count !== prevState.count) {
+      this.getData()
+    }
+    if (this.state.data !== prevState.data && this.state.count != 0) {
       let offset = 100;
       window.scrollTo({
-        behavior: "smooth",
+        //behavior: "smooth",
         top:
           document.getElementById("top").getBoundingClientRect().top -
           document.body.getBoundingClientRect().top -
           offset
       });
-      this.getData()
     }
-
   }
 
   increment() {
+
     this.setState({
       count: this.state.count + 5,
     });
@@ -102,15 +98,23 @@ class App extends Component {
     const dataLoaded = this.state.data.length;
     const next = this.state.next;
     return (
+      <>
       <div id="top">
+      <div className="row justify-content-center mb-2 pb-3">
+        <div className="col-md-7 heading-section heading-section-2 text-center ftco-animate fadeInUp ftco-animated">
+          <h2 className="mb-4">Ostatnio dodane zdjęcia</h2>
+          <h5 className="mb-4">Kliknij na zdjęcie, aby powiększyć</h5>
+        </div>
+      </div>
+      </div>
         {dataLoaded
           ? <div>
             <Photos photos={this.state.data} />
-            {next ? <button className='btn-show-more' onClick={(e) => this.increment(e)}>Pokaż więcej</button> : ""}
+            {next ? <button className='btn-show-more' id={this.state.next} onClick={(e) => this.increment(e)}>Pokaż więcej</button> : ""}
           </div>
           : <h3>Ładowanie galerii zdjęć...</h3>
         }
-      </div>
+      </>
     );
   }
 
